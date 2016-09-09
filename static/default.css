@@ -4,3 +4,8 @@ body {
 .mdl-data-table {
   margin:0 auto;
 }
+.flip {
+  margin:20px auto;
+  width: 480px;
+  height: 160px;
+}

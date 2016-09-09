@@ -1,0 +1,26 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="/static/default.css">
+</head>
+<body>
+  <div class="flip mdl-card mdl-shadow--2dp">
+    <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ url_for("unpin_list") }}"><i class="material-icons">clear</i></a>
+
+    Enter pin code for card <code>{{tagid}}</code>.
+    <form action="{{ url_for("tag_unlock", tagid=tagid) }}" method="post">
+      <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="text" id="pin" name="pin">
+        <label class="mdl-textfield__label" for="pin">Pin code</label>
+      </div>
+      <div>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+          OK
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

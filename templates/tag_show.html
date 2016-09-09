@@ -1,0 +1,50 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-pink.min.css">
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="/static/default.css">
+</head>
+<body>
+{% if bookmark %}
+<i class="material-icons">warning</i> Bookmark this page.
+{% endif %}
+
+<h1>{{tagid}}</h1>
+
+<form action="{{ url_for("hook_add", tagid=tagid) }}" method="post">
+  <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input" type="text" id="add_url" name="url">
+          <label class="mdl-textfield__label" for="add_url">http://example.com/path/to/webhook</label>
+  </div>
+  <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+    Add
+  </button>
+</form>
+
+{% if hooks %}
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+<thead><tr>
+<th></th>
+<th class="mdl-data-table__cell--non-numeric">webhook URL</th>
+</tr></thead>
+<tbody>
+{% for hook in hooks %}
+<tr>
+  <td class="mdl-data-table__cell--non-numeric">
+    <form action="{{ url_for("hook_delete", tagid=tagid) }}" method="post">
+      <input type="hidden" name="url" value="{{hook.url}}"/>
+      <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
+        <i class="material-icons">delete</i>
+      </button>
+    </form>
+  </td>
+  <td class="mdl-data-table__cell--non-numeric mdl-typography--body-2">{{hook.url}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+
+</body>
+</html>
