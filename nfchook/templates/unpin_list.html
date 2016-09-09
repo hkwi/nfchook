@@ -7,6 +7,8 @@
 </head>
 <body>
 <h1>Cards</h1>
+
+{% if tags %}
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 <thead><tr>
 <th></th>
@@ -27,6 +29,10 @@
 {% endfor %}
 </tbody>
 </table>
+{% else %}
+No new cards found. Please hang your card over the reader.
+{% endif %}
+
 </body>
 </html>
 
