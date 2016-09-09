@@ -20,7 +20,7 @@ class TagHandler(object):
 		self.session = session
 	
 	def __call__(self, tag):
-		print tag
+		logging.info(tag)
 		now = datetime.datetime.now()
 		if now > blocker.get(tag.identifier, long_time_ago) + datetime.timedelta(seconds=2):
 			tagid = binascii.b2a_hex(tag.identifier)
@@ -50,6 +50,7 @@ def dialer(urls):
 			logging.error(url)
 
 def main():
+	logging.basicConfig(level=logging.INFO)
 	dbpath = os.environ.get("SQLALCHEMY_DATABASE_URI", "sqlite:////tmp/nfchook.db")
 	worker = multiprocessing.Process(target=dialer, args=(urls,))
 	worker.daemon = True
