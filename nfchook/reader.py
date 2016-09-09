@@ -1,3 +1,4 @@
+import os
 import nfc
 import datetime
 import binascii
@@ -48,7 +49,8 @@ def dialer(urls):
 		except:
 			logging.error(url)
 
-def main(dbpath):
+def main():
+	dbpath = os.environ.get("SQLALCHEMY_DATABASE_URI", "sqlite:////tmp/nfchook.db")
 	worker = multiprocessing.Process(target=dialer, args=(urls,))
 	worker.daemon = True
 	worker.start()
@@ -58,5 +60,5 @@ def main(dbpath):
 			clf.connect(rdwr={"on-connect": TagHandler(session)})
 
 if __name__=="__main__":
-	main("sqlite:////tmp/nfchook.db")
+	main()
 

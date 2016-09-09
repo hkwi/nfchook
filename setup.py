@@ -1,0 +1,17 @@
+try:
+	from setuptools import setup
+except:
+	from distutils.core import setup
+
+setup(name="nfchook",
+	version="0.1",
+	description="NFC reader to webhook",
+	author="Kawai, Hiroaki",
+	author_email="hiroaki.kawai@gmail.com",
+	url="https://github.com/hkwi/nfchook/",
+	packages=["nfchook"],
+	entry_points = {
+		"console_scripts": ["nfchook_web=nfchook.web:main",
+			"nfchook_reader=nfchook.reader:main"],
+	}
+)
