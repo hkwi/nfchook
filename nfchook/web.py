@@ -8,7 +8,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 from . import data
 
-app = Flask(__name__)
+app = Flask(__name__,
+	template_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), "template")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI", "sqlite:////tmp/nfchook.db")
 db = SQLAlchemy(app)
 
@@ -90,7 +91,7 @@ def hook_delete(tagid):
 
 def main():
 	app.wsgi_app = SessionMiddleware(app.wsgi_app, {"session.type": "cookie", "session.validate_key": "nfchook"})
-	app.run(host="")
+	app.run(host="", port=80)
 
 if __name__=="__main__":
 	main()
