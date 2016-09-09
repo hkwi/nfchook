@@ -9,7 +9,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from . import data
 
 app = Flask(__name__,
-	template_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), "template")
+	template_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), "template"))
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI", "sqlite:////tmp/nfchook.db")
 db = SQLAlchemy(app)
 
