@@ -1,0 +1,10 @@
+[Unit]
+Description=NFC hook web
+After=network.target
+
+[Service]
+Environment=SQLALCHEMY_DATABASE_URI=sqlite:////var/run/nfchook.db
+ExecStart=/home/pi/nfc/bin/nfchook_web
+
+[Install]
+WantedBy=multi-user.target
