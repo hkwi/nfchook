@@ -33,7 +33,7 @@ def tag_show(tagid):
 		return render_template("tag_init.html", tagid=tagid)
 
 	session = request.environ["beaker.session"]
-	if tag.pin and tag.pin != session["pin"]:
+	if tag.pin and tag.pin != session.get("pin"):
 		return render_template("tag_pin.html", tagid=tagid)
 	
 	bookmark = session.get("init")
@@ -59,7 +59,7 @@ def tag_init(tagid):
 
 @app.route("/tag/<tagid>/unlock", methods=["POST"])
 def tag_unlock(tagid):
-	pin = db.session.query(data.Pin).filter_by(tag=tagid, pin=None).first()
+	pin = db.session.query(data.Pin).filter_by(tag=tagid).first()
 	if pin and request.form["pin"] == pin.pin:
 		session = request.environ["beaker.session"]
 		session["pin"] = pin.pin
